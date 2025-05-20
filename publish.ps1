@@ -21,7 +21,7 @@ git add .
 git commit -m "Release $version"
 
 # 6. Finish git flow release
-# git flow release finish $version
+git flow release finish $version
 
 # 7. Push changes and tags to origin
 # git push -u origin main --follow-tags
