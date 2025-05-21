@@ -3,25 +3,26 @@ param(
     [string]$bump = "patch"
 )
 
-# 1. Login to npm (only needed once; optional here)
-# npm login
 
-# 2. Bump the version without tagging
+# Bump the version without tagging
 npm version $bump --no-git-tag-version
 
-# 3. Get the new version
+# Get the new version
 $version = (Get-Content package.json | ConvertFrom-Json).version
 Write-Host "New version: $version"
 
-# 5. Stage and commit version bump
+git add .
+git commit -m "Prepare for release $version"
+
+# Start git flow release
+git flow release start $version
+
+# Stage and commit version bump
 git add .
 git commit -m "Release $version"
 
-# 4. Start git flow release
-git flow release start $version
 
-
-# 6. Finish git flow release
+# Finish git flow release
 git flow release finish $version
 
 # 7. Push changes and tags to origin
