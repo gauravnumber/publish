@@ -11,6 +11,9 @@ npm version $bump --no-git-tag-version
 $version = (Get-Content package.json | ConvertFrom-Json).version
 Write-Host "New version: $version"
 
+git add .
+git commit -m "Prepare for release $version"
+
 # Start git flow release
 git flow release start $version
 
